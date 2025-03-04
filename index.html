@@ -1,0 +1,1253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEALTH4STUDENTS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: #f0f7ff;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles with Gradient */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 50px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        header .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Animated Navigation */
+        nav {
+            background: var(--secondary);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            padding: 10px 0;
+            background: rgba(58, 12, 163, 0.95);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* Section Styling */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--secondary);
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        /* About Section */
+        #about {
+            background-color: white;
+        }
+        
+        #about .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        #about .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        #about .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        #about .about-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        #about img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: all 0.5s ease;
+        }
+        
+        #about img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Resources Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary);
+            z-index: -1;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card i {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: rgba(67, 97, 238, 0.1);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover i {
+            transform: rotateY(180deg);
+            color: var(--secondary);
+            background: rgba(67, 97, 238, 0.2);
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            text-align: center;
+        }
+        
+        .card p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--dark);
+        }
+        
+        .card ol {
+            padding-left: 20px;
+            margin-top: 15px;
+        }
+        
+        .card ol li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 5px;
+        }
+        
+        /* Video Section */
+        .video-section {
+            background: linear-gradient(to right, #e0f7fa, #bbdefb);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .video-container iframe {
+            width: 30%;
+            min-width: 300px;
+            height: 250px;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .video-container iframe:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* PDF Resources */
+        .pdf-resources {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .pdf-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .pdf-link:hover {
+            background: white;
+            color: var(--secondary);
+            transform: translateY(-3px);
+            border: 1px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+        }
+        
+        .pdf-link i {
+            margin-right: 15px;
+            font-size: 20px;
+            color: #e63946;
+            background: none;
+            width: auto;
+            height: auto;
+        }
+        
+        /* Quiz Section */
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quiz-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--secondary);
+        }
+        
+        .quiz-question {
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .quiz-options {
+            margin-top: 10px;
+        }
+        
+        .quiz-option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .quiz-option:hover {
+            background: rgba(67, 97, 238, 0.05);
+            border-color: var(--primary);
+        }
+        
+        .quiz-option input {
+            margin-right: 10px;
+        }
+        
+        .quiz-container button {
+            display: block;
+            margin: 30px auto 0;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .quiz-container button:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        #quiz-result {
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+        
+        .dashboard h3 {
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+        
+        .score-chart {
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .score-bar {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            background: linear-gradient(to top, var(--secondary), var(--primary), var(--accent));
+            transition: height 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .score-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .score-label {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        
+        .contact-section {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+            background: white;
+        }
+        
+        .contact-form h2 {
+            margin-bottom: 30px;
+            color: var(--secondary);
+            text-align: left;
+        }
+        
+        .contact-form h2::after {
+            left: 0;
+            transform: none;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+        }
+        
+        .contact-form button {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .contact-form button:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        .contact-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .contact-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            text-align: left;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+            
+            .video-container iframe {
+                width: 100%;
+            }
+            
+            #about .about-content {
+                flex-direction: column-reverse;
+            }
+            
+            .contact-form,
+            .contact-image {
+                padding: 30px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>HEALTH4STUDENTS</h1>
+            <p>Empowering students to take control of their health and well-being</p>
+        </div>
+    </header>
+    
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#resources">Resources</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#units">Units</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section id="about" class="section">
+        <div class="container fade-in">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>We are dedicated to providing comprehensive healthcare education resources for students, empowering them to make informed decisions and adopt healthier lifestyles.</p>
+                    <p>Our curriculum integrates essential health topics like nutrition, physical activity, mental health, and first aid into a structured learning framework that's both engaging and evidence-based.</p>
+                    <p class="center>Through our step-by-step methodology, students develop critical health literacy skills that lead to improved academic performance, reduced health risks, and lifelong wellness habits</p>
+                </div>
+                <div class="about-image">
+                    
+            </div>
+        </div>
+    </section>
+    
+    <section id="resources" class="section">
+        <div class="container fade-in">
+            <h2>Health Resources</h2>
+            <div class="grid">
+                <div class="card">
+                    <i class="fas fa-apple-alt"></i>
+                    <h3>Nutrition</h3>
+                    <p>Fuel your body and mind with proper nutrition</p>
+                    <ol>
+                        <li>Eat a variety of nutrient-rich foods.</li>
+                        <li>Include plenty of fruits and vegetables in your diet.</li>
+                        <li>Stay hydrated by drinking enough water daily.</li>
+                        <li>Limit sugar and processed food intake.</li>
+                        <li>Ensure adequate protein intake for muscle and tissue repair.</li>
+                    </ol>
+                </div>
+                                      
+                <div class="card">
+                    <i class="fas fa-running"></i>
+                    <h3>Physical Activity</h3>
+                    <p>Move your body for better health and energy</p>
+                    <ol>
+                        <li>Engage in at least 30 minutes of moderate exercise daily.</li>
+                        <li>Incorporate strength training exercises twice a week.</li>
+                        <li>Practice flexibility and stretching routines to avoid injuries.</li>
+                        <li>Take breaks from prolonged sitting by moving every hour.</li>
+                        <li>Join group activities like sports or dance for motivation.</li>
+                    </ol>
+                </div>
+                
+                <div class="card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Health Conditions</h3>
+                    <p>Understanding common health issues and prevention</p>
+                    <ol>
+                        <li>Obesity and its impact on overall health.</li>
+                        <li>Diabetes management and prevention.</li>
+                        <li>Heart disease and healthy lifestyle choices.</li>
+                        <li>Common mental health disorders and coping strategies.</li>
+                        <li>Preventive measures for infectious diseases.</li>
+                    </ol>
+                </div>
+                
+                <div class="card">
+                    <i class="fas fa-smile"></i>
+                    <h3>Mental Health</h3>
+                    <p>Care for your mind as much as your body</p>
+                    <ol>
+                        <li>Understanding stress and effective stress management techniques.</li>
+                        <li>Importance of sleep and its role in mental well-being.</li>
+                        <li>Recognizing signs of anxiety and depression.</li>
+                        <li>Developing healthy coping mechanisms.</li>
+                        <li>Seeking professional help when necessary.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>   
+        
+    <section id="videos" class="video-section">
+        <div class="container fade-in">
+            <h2>Health Education Videos</h2>
+            <div class="video-container">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/DxIDKZHW3-E?autoplay=1&mute=1&controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/XSzsI5aGcK4?autoplay=1&mute=1&loop=1" allow="autoplay" frameborder="0"></iframe>
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/dhpCdqOtuj0?autoplay=1&mute=1&controls=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+    
+    <section id="units" class="section">
+        <div class="container fade-in">
+            <h2>Our Health Units</h2>
+            <div class="grid">
+                <div class="card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Mental Health</h3>
+                    <p>Understanding mental well-being and coping strategies.</p>
+                    <div class="pdf-resources">
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Mental Health Guide for Students
+                        </a>
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Stress Management Techniques
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Physical Well-being</h3>
+                    <p>Stay active and maintain a healthy lifestyle.</p>
+                    <div class="pdf-resources">
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Exercise Guide for Beginners
+                        </a>
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Home Workout Routines
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fas fa-user"></i>
+                    <h3>Body</h3>
+                    <p>Learn about body functions and overall health.</p>
+                    <div class="pdf-resources">
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Human Body Systems Guide
+                        </a>
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Healthy Body Maintenance
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Mind</h3>
+                    <p>Strengthen cognitive abilities and mindfulness practices.</p>
+                    <div class="pdf-resources">
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Mindfulness for Students
+                        </a>
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Brain Health &amp; Cognition
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fas fa-spa"></i>
+                    <h3>Yoga</h3>
+                    <p>Enhance flexibility and mental clarity through yoga.</p>
+                    <div class="pdf-resources">
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Yoga Poses for Beginners
+                        </a>
+                        <a href="#" class="pdf-link" onclick="alert('PDF download will be available soon!')">
+                            <i class="fas fa-file-pdf"></i> Breathing Techniques Guide
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+  <section id="quiz" class="section">
+    <div class="container fade-in">
+        <h2>Test Your Health Knowledge</h2>
+        <div class="quiz-container">
+            <div id="quiz-questions">
+                <div class="quiz-question">
+                    <h3>1. Which of the following is NOT a primary food group?</h3>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="a"> Fruits and Vegetables
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="b"> Grains
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="c"> Proteins
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="d"> Sugars
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h3>2. How many minutes of moderate physical activity is recommended for adults daily?</h3>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="a"> 15 minutes
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="b"> 30 minutes
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="c"> 60 minutes
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="d"> 90 minutes
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h3>3. Which of the following is a sign of good mental health?</h3>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="a"> Ability to cope with normal stresses of life
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="b"> Never feeling sad or anxious
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="c"> Avoiding all social interactions
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="d"> Working without taking breaks
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h3>4. Which vitamin is primarily produced when skin is exposed to sunlight?</h3>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="a"> Vitamin A
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="b"> Vitamin C
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="c"> Vitamin D
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="d"> Vitamin E
+                        </label>
+                    </div>
+                </div>
+
+                <div class="quiz-question">
+                    <h3>5. What is the recommended amount of water to drink daily for most adults?</h3>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="a"> 2-3 cups
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="b"> 4-5 cups
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="c"> 8 cups (2 liters)
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="d"> 1 gallon (4 liters)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="submit-quiz">Submit Answers</button>
+            <div id="quiz-result"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Quiz JavaScript functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const quizAnswers = {
+        q1: "d", // Sugars
+        q2: "b", // 30 minutes
+        q3: "a", // Ability to cope with normal stresses of life
+        q4: "c", // Vitamin D
+        q5: "c"  // 8 cups (2 liters)
+    };
+    
+    const submitButton = document.getElementById('submit-quiz');
+    const resultDiv = document.getElementById('quiz-result');
+    
+    submitButton.addEventListener('click', function() {
+        let score = 0;
+        let totalQuestions = Object.keys(quizAnswers).length;
+        let unanswered = 0;
+        
+        // Check each question
+        for (let question in quizAnswers) {
+            const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+            
+            if (selectedOption) {
+                if (selectedOption.value === quizAnswers[question]) {
+                    score++;
+                }
+            } else {
+                unanswered++;
+            }
+        }
+        
+        // Display result
+        if (unanswered > 0) {
+            resultDiv.innerHTML = `<div class="alert alert-warning">Please answer all questions before submitting.</div>`;
+            resultDiv.style.backgroundColor = "#fff3cd";
+            resultDiv.style.color = "#856404";
+            resultDiv.style.border = "1px solid #ffeeba";
+        } else {
+            const percentage = Math.round((score / totalQuestions) * 100);
+            let resultMessage = '';
+            let resultColor = '';
+            
+            if (percentage >= 80) {
+                resultMessage = `Excellent! You scored ${score}/${totalQuestions} (${percentage}%). You have good health knowledge!`;
+                resultColor = "#d4edda";
+                textColor = "#155724";
+                border = "1px solid #c3e6cb";
+            } else if (percentage >= 60) {
+                resultMessage = `Good job! You scored ${score}/${totalQuestions} (${percentage}%). You know the basics but there's room to learn more.`;
+                resultColor = "#e8f5e9";
+                textColor = "#237c36";
+                border = "1px solid #c5e1a5";
+            } else {
+                resultMessage = `You scored ${score}/${totalQuestions} (${percentage}%). Consider reviewing our health resources to improve your knowledge.`;
+                resultColor = "#f8d7da";
+                textColor = "#721c24";
+                border = "1px solid #f5c6cb";
+            }
+            
+            resultDiv.innerHTML = resultMessage;
+            resultDiv.style.backgroundColor = resultColor;
+            resultDiv.style.color = textColor;
+            resultDiv.style.border = border;
+            resultDiv.style.padding = "15px";
+            resultDiv.style.borderRadius = "8px";
+            
+            // Update dashboard if it exists
+            const scoreChart = document.querySelector('.score-bar');
+            const scoreText = document.querySelector('.score-text');
+            
+            if (scoreChart && scoreText) {
+                scoreChart.style.height = `${percentage}%`;
+                scoreText.textContent = `${percentage}%`;
+            }
+        }
+    });
+});
+</script>       <!-- Dashboard Section -->
+<section id="dashboard" class="section">
+    <div class="container fade-in">
+        <h2>Your Health Dashboard</h2>
+        <div class="dashboard">
+            <h3>Your Health Knowledge Score</h3>
+            <div class="score-chart">
+                <div class="score-bar" style="height: 0%;"></div>
+                <div class="score-text">0%</div>
+                <div class="score-label">Score</div>
+            </div>
+            
+            <!-- Additional dashboard widgets can be added here -->
+            <div class="grid" style="margin-top: 40px;">
+                <div class="card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Progress Tracker</h3>
+                    <p>Complete health units to boost your knowledge score</p>
+                    <ul style="list-style-type: none; padding: 0; margin-top: 15px;">
+                        <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+                            <span>Nutrition Basics</span>
+                            <span>50%</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+                            <span>Physical Activity</span>
+                            <span>75%</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+                            <span>Mental Wellness</span>
+                            <span>25%</span>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; padding: 8px 0;">
+                            <span>First Aid</span>
+                            <span>10%</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <i class="fas fa-medal"></i>
+                    <h3>Achievements</h3>
+                    <p>Earn badges as you complete health milestones</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; justify-content: center;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-apple-alt" style="font-size: 24px; color: #4361ee; margin-bottom: 5px;"></i>
+                            <p style="font-size: 0.9rem; margin: 0;">Nutrition Pro</p>
+                        </div>
+                        <div style="text-align: center; opacity: 0.5;">
+                            <i class="fas fa-running" style="font-size: 24px; color: #4361ee; margin-bottom: 5px;"></i>
+                            <p style="font-size: 0.9rem; margin: 0;">Fitness Star</p>
+                        </div>
+                        <div style="text-align: center; opacity: 0.5;">
+                            <i class="fas fa-brain" style="font-size: 24px; color: #4361ee; margin-bottom: 5px;"></i>
+                            <p style="font-size: 0.9rem; margin: 0;">Mind Master</p>
+                        </div>
+                        <div style="text-align: center; opacity: 0.5;">
+                            <i class="fas fa-heartbeat" style="font-size: 24px; color: #4361ee; margin-bottom: 5px;"></i>
+                            <p style="font-size: 0.9rem; margin: 0;">Health Expert</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personal health goals section -->
+            <div style="margin-top: 40px;">
+                <h3 style="text-align: center; margin-bottom: 20px;">My Health Goals</h3>
+                <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <input type="checkbox" id="goal1" style="margin-right: 10px; width: auto;">
+                        <label for="goal1">Drink 8 glasses of water daily</label>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <input type="checkbox" id="goal2" style="margin-right: 10px; width: auto;">
+                        <label for="goal2">Exercise for 30 minutes, 5 days a week</label>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <input type="checkbox" id="goal3" style="margin-right: 10px; width: auto;">
+                        <label for="goal3">Eat 5 servings of fruits and vegetables daily</label>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" id="goal4" style="margin-right: 10px; width: auto;">
+                        <label for="goal4">Practice meditation for 10 minutes daily</label>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <label for="newGoal" style="display: block; margin-bottom: 8px;">Add a new health goal:</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="newGoal" style="flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                            <button style="background: var(--primary); color: white; border: none; border-radius: 5px; padding: 0 15px; cursor: pointer;">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+    <div class="container fade-in">
+        <h2>Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-section">
+                <div class="contact-form">
+                    <h2>Get In Touch</h2>
+                    <form id="contactForm">
+                        <div>
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your name" required>
+                        </div>
+                        <div>
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Your email" required>
+                        </div>
+                        <div>
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Subject of your message">
+                        </div>
+                        <div>
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
+                        </div>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-image">
+                    <img src="https://via.placeholder.com/500x300" alt="Contact us">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Additional contact information -->
+        <div class="grid" style="margin-top: 40px;">
+            <div class="card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Office Location</h3>
+                <p>123 Health Education Avenue<br>Wellness City, WC 12345</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-phone"></i>
+                <h3>Phone Number</h3>
+                <p>+1 (555) 123-4567<br>Monday - Friday: 9am - 5pm</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email Address</h3>
+                <p>info@health4students.com<br>support@health4students.com</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Simple script to handle form submission -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.getElementById('contactForm');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple form validation
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && email && message) {
+                    // In a real application, you would send this data to a server
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                } else {
+                    alert('Please fill in all required fields.');
+                }
+   
